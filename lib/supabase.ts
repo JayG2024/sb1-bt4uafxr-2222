@@ -4,21 +4,14 @@ const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
 // Validate environment variables
-if (!supabaseUrl || !supabaseKey || 
-    supabaseUrl.includes('your_supabase_url_here') || 
-    supabaseUrl.includes('your-project-ref.supabase.co') ||
-    supabaseKey.includes('your_supabase_anon_key_here') ||
-    supabaseKey.includes('your-anon-public-key')) {
+if (!supabaseUrl || !supabaseKey) {
   console.error('❌ Supabase configuration error:');
-  console.error('Please update your .env.local file with actual Supabase credentials.');
-  console.error('You can find these values in your Supabase project settings under the API section.');
-  console.error('');
+  console.error('Missing environment variables. Please check your .env.local file.');
   console.error('Required environment variables:');
-  console.error('- NEXT_PUBLIC_SUPABASE_URL=https://your-project-ref.supabase.co');
-  console.error('- NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-public-key');
+  console.error('- NEXT_PUBLIC_SUPABASE_URL');
+  console.error('- NEXT_PUBLIC_SUPABASE_ANON_KEY');
   
   // Create a dummy client to prevent the app from crashing
-  // This allows the app to load and show the setup instructions
   throw new Error('Supabase not configured. Please check your environment variables.');
 }
 

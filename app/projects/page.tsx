@@ -1,7 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import { useAuth } from '@/hooks/use-auth';
 import { useProjects } from '@/hooks/use-query';
 import { Sidebar } from '@/components/layout/sidebar';
@@ -14,15 +13,8 @@ import { Loader2, Plus } from 'lucide-react';
 
 export default function Projects() {
   const { user, loading } = useAuth();
-  const router = useRouter();
   const { data: projects, isLoading, error } = useProjects();
   const [showForm, setShowForm] = useState(false);
-
-  useEffect(() => {
-    if (!loading && !user) {
-      router.push('/');
-    }
-  }, [user, loading, router]);
 
   if (loading || isLoading) {
     return (
@@ -30,10 +22,6 @@ export default function Projects() {
         <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
       </div>
     );
-  }
-
-  if (!user) {
-    return null;
   }
 
   if (error) {

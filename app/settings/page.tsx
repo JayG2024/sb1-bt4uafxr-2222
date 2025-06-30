@@ -1,7 +1,5 @@
 'use client';
 
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import { useAuth } from '@/hooks/use-auth';
 import { Sidebar } from '@/components/layout/sidebar';
 import { Header } from '@/components/layout/header';
@@ -9,13 +7,6 @@ import { Loader2 } from 'lucide-react';
 
 export default function Settings() {
   const { user, loading } = useAuth();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!loading && !user) {
-      router.push('/');
-    }
-  }, [user, loading, router]);
 
   if (loading) {
     return (
@@ -23,10 +14,6 @@ export default function Settings() {
         <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
       </div>
     );
-  }
-
-  if (!user) {
-    return null;
   }
 
   return (

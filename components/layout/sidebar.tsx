@@ -19,7 +19,6 @@ import {
   X
 } from 'lucide-react';
 import { useAuth } from '@/hooks/use-auth';
-import { signOut } from '@/lib/auth';
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
@@ -36,12 +35,8 @@ export function Sidebar() {
   const { user } = useAuth();
 
   const handleSignOut = async () => {
-    try {
-      await signOut();
-      window.location.href = '/';
-    } catch (error) {
-      console.error('Error signing out:', error);
-    }
+    // For demo mode, just redirect to home
+    window.location.href = '/';
   };
 
   const sidebarContent = (

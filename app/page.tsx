@@ -2,7 +2,6 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { LoginForm } from '@/components/auth/login-form';
 import { useAuth } from '@/hooks/use-auth';
 import { Loader2 } from 'lucide-react';
 
@@ -21,20 +20,24 @@ export default function Home() {
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-indigo-50">
         <div className="text-center">
           <Loader2 className="h-12 w-12 animate-spin text-blue-600 mx-auto mb-4" />
-          <p className="text-gray-600 text-lg">Loading...</p>
+          <p className="text-gray-600 text-lg">Loading DevCRM...</p>
         </div>
       </div>
     );
   }
 
+  // Redirect to dashboard immediately
   if (user) {
-    return null; // Will redirect to dashboard
+    router.push('/dashboard');
+    return null;
   }
 
+  // Fallback - should not reach here with mock auth
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-indigo-50 px-4 py-8">
-      <div className="w-full max-w-md">
-        <LoginForm />
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-indigo-50">
+      <div className="text-center">
+        <h1 className="text-4xl font-bold text-gray-900 mb-4">Welcome to DevCRM</h1>
+        <p className="text-gray-600 text-lg">Redirecting to dashboard...</p>
       </div>
     </div>
   );

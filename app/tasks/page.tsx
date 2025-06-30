@@ -1,7 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import { useAuth } from '@/hooks/use-auth';
 import { useTasks } from '@/hooks/use-query';
 import { Sidebar } from '@/components/layout/sidebar';
@@ -16,15 +15,8 @@ import { TaskList } from '@/components/tasks/task-list';
 
 export default function Tasks() {
   const { user, loading } = useAuth();
-  const router = useRouter();
   const { data: tasks, isLoading, error } = useTasks();
   const [showForm, setShowForm] = useState(false);
-
-  useEffect(() => {
-    if (!loading && !user) {
-      router.push('/');
-    }
-  }, [user, loading, router]);
 
   if (loading || isLoading) {
     return (
@@ -32,10 +24,6 @@ export default function Tasks() {
         <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
       </div>
     );
-  }
-
-  if (!user) {
-    return null;
   }
 
   if (error) {
